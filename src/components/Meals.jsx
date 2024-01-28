@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchMeals } from "../utils/http";
+import MealItem from "./MealItem";
 
 export default function Meals() {
   const [fetchedMeals, setFetchedMeals] = useState([]);
@@ -18,7 +19,7 @@ export default function Meals() {
   return (
     <ul id="meals">
       {fetchedMeals.map((meal) => (
-        <li key={meal.id}>{meal.name}</li>
+        <MealItem key={meal.id} meal={meal} />
       ))}
     </ul>
   );
