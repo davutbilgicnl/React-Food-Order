@@ -20,19 +20,47 @@ export async function fetchOrders() {
   return orders;
 }
 
-export async function updateOrders(orders) {
+export async function updateOrders(items, customerData) {
   const response = await fetch("http://localhost:3000/orders", {
     method: "PUT",
-    body: JSON.stringify({ orders }),
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      order: {
+        items,
+        customer: customerData,
+      },
+    }),
   });
 
   const resData = await response.json();
 
   if (!response.ok) {
     throw new Error("Failed to update orders");
+  }
+
+  return resData;
+}
+
+export async function postOrders(items, customerData) {
+  const response = await fetch("http://localhost:3000/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      order: {
+        items,
+        customer: customerData,
+      },
+    }),
+  });
+
+  const resData = await response.json();
+
+  if (!response.ok) {
+    throw new Error("Failed to post orders");
   }
 
   return resData;

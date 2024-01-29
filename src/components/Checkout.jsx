@@ -5,6 +5,7 @@ import Input from "../UI/Input";
 import Button from "../UI/Button";
 import UserProgressContext from "../store/UserProgressContext";
 import Modal from "../UI/Modal";
+import { postOrders } from "../utils/http";
 
 export default function Checkout() {
   const cartCtx = useContext(CartContext);
@@ -24,6 +25,8 @@ export default function Checkout() {
 
     const fd = new FormData(event.target);
     const customerData = Object.fromEntries(fd.entries());
+
+    postOrders(cartCtx.cartItems, customerData);
   }
 
   return (
@@ -32,7 +35,7 @@ export default function Checkout() {
         <h2>Checkout</h2>
         <p>Total Amount: {currencyFormatter.format(cartTotal)}</p>
 
-        <Input label="Full name" type="text" id="full-name" />
+        <Input label="Full name" type="text" id="name" />
         <Input label="E-mail Address" type="email" id="email" />
         <Input label="Street" type="text" id="street" />
         <div className="control-row">
