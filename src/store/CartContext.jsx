@@ -4,6 +4,7 @@ const CartContext = createContext({
   cartItems: [],
   addItem: (item) => {},
   removeItem: (id) => {},
+  clearCart: () => {},
 });
 
 function cartReducerFn(cartState, action) {
@@ -50,6 +51,10 @@ function cartReducerFn(cartState, action) {
     return { ...cartState, cartItems: updatedCartItems };
   }
 
+  if (action.type === "CLEAR_CART") {
+    return { ...cartState, cartItems: [] };
+  }
+
   throw new Error("Unknown item action: " + action.type);
 }
 
@@ -64,10 +69,15 @@ export function CartContextProvider({ children }) {
     dispatchCartActionFn({ type: "REMOVE_ITEM", id: id });
   }
 
+  function clearCart() {
+    dispatchCartActionFn({ type: "CLEAR_CART" });
+  }
+
   const cartContext = {
     cartItems: cartState.cartItems,
     addItem,
     removeItem,
+    clearCart,
   };
 
   //   console.log(cartContext);
