@@ -260,3 +260,32 @@ h1 {
     transform: translateY(0);
   }
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  /* text-align: center; */
+  padding: 5px;
+  background-color: #ebcdcf;
+  border-radius: 8px;
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    color: #8b1717;
+    font-size: 1.2em;
+    margin: 1px;
+    padding: 1px;
+  }
+
+  p {
+    color: #8b1717;
+    font-size: 1em;
+    margin: 1px;
+    padding: 1px;
+  }
+}
