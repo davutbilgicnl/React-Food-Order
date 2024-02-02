@@ -20,13 +20,14 @@ export default function Checkout() {
     userProgressCtx.hideCheckout();
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const fd = new FormData(event.target);
     const customerData = Object.fromEntries(fd.entries());
 
-    postOrders(cartCtx.cartItems, customerData);
+    const response = await postOrders(cartCtx.cartItems, customerData);
+    console.log("🚀 ~ handleSubmit ~ response:", response.status);
   }
 
   return (
